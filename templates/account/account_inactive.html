@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Account Inactive" %} - Django Scaffold{% endblock %}
+
+{% block content %}
+{% include "partials/_auth_styles.html" %}
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-icon-warning">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
+    </div>
+    <span class="auth-eyebrow">{% trans "Account status" %}</span>
+    <h1 class="auth-heading">{% trans "Account Inactive" %}</h1>
+    <p class="auth-subtext">{% trans "This account is currently inactive." %} Please contact support if you believe this is an error.</p>
+
+    <a href="/" class="auth-btn-secondary">Go to homepage</a>
+
+    <div class="auth-footer-text">
+      <a href="{% url 'account_login' %}">Try logging in again</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

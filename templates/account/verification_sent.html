@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Password Reset Sent - Django Scaffold{% endblock %}
+{% block title %}Verify Your Email - Django Scaffold{% endblock %}
 
 {% block content %}
 {% include "partials/_auth_styles.html" %}
 
 <div class="auth-page">
   <div class="auth-card">
-    <div class="auth-icon-success">
+    <div class="auth-icon">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
     </div>
-    <span class="auth-eyebrow">Email sent</span>
-    <h1 class="auth-heading">Check your email</h1>
-    <p class="auth-subtext">We've sent you an email with instructions to reset your password. If you don't see it, check your spam folder.</p>
+    <span class="auth-eyebrow">Almost there</span>
+    <h1 class="auth-heading">Check your inbox</h1>
+    <p class="auth-subtext">We've sent a verification email to your address. Click the link inside to activate your account.</p>
 
     <a href="{% url 'account_login' %}" class="auth-btn-primary">Back to log in</a>
   </div>

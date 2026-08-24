@@ -1,16 +1,29 @@
 {% extends "base.html" %}
 
-{% block title %}Sign Out - Django Scaffold{% endblock %}
+{% block title %}Log out - Django Scaffold{% endblock %}
 
 {% block content %}
-<div class="auth-card" style="text-align: center;">
-    <h1>Sign Out</h1>
-    
-    <p style="margin-bottom: 1.5rem; color: #4b5563;">Are you sure you want to sign out?</p>
+{% include "partials/_auth_styles.html" %}
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-icon-danger">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" /></svg>
+    </div>
+    <span class="auth-eyebrow">Signing out</span>
+    <h1 class="auth-heading">Log out of Django Scaffold</h1>
+    <p class="auth-subtext">Are you sure you want to sign out? You can always log back in anytime.</p>
 
     <form method="POST" action="{% url 'account_logout' %}">
-        {% csrf_token %}
-        <button type="submit">Sign Out</button>
+      {% csrf_token %}
+      <button type="submit" class="auth-btn-primary" style="background:#dc2626;box-shadow:0 2px 8px rgba(220,38,38,0.2);" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#dc2626'">
+        Log out
+      </button>
     </form>
+
+    <div class="auth-footer-text">
+      <a href="/">&larr; Stay signed in</a>
+    </div>
+  </div>
 </div>
 {% endblock %}

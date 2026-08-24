@@ -10,6 +10,7 @@ A minimal, clean, and reusable Django boilerplate configured with uv, Docker, an
 ## Features
 
 - **Authentication:** Custom User model configured with email login (via Django-allauth)
+- **User Profiles & Account Management:** Seamless single-page tabbed interface for viewing profiles, editing details, avatar uploads, and changing passwords.
 - **Role-Based Access Control (RBAC):** Users can have roles such as `admin` and `user`. 
   - `admin`: Has `is_staff` and `is_superuser` privileges for access to Django admin and protected areas.
   - `user`: Default role for regular users.

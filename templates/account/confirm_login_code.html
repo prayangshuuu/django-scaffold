@@ -3,36 +3,45 @@
 {% block title %}Confirm Login Code - Django Scaffold{% endblock %}
 
 {% block content %}
-<div class="auth-card">
-    <h1>Enter Login Code</h1>
-    <p style="margin-bottom: 1.5rem; color: #4b5563; font-size: 0.875rem;">We've sent a login code to your email. Please enter it below.</p>
-    
-    {% if form.errors %}
-    <div class="alert alert-error">
-        Please correct the errors below.
+{% include "partials/_auth_styles.html" %}
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" /></svg>
     </div>
-    {% endif %}
+    <span class="auth-eyebrow">Verification</span>
+    <h1 class="auth-heading">Enter your code</h1>
+    <p class="auth-subtext">We've sent a 6-digit login code to your email. Enter it below to sign in.</p>
 
     <form method="POST" action="{% url 'account_confirm_login_code' %}">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        
-        {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {{ field }}
-                {% if field.help_text %}
-                    <small style="color: #6b7280; font-size: 0.75rem;">{{ field.help_text }}</small>
-                {% endif %}
-                {{ field.errors }}
-            </div>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+      <div class="auth-non-field-errors">
+        {% for error in form.non_field_errors %}
+          <div>{{ error }}</div>
         {% endfor %}
-        
-        <button type="submit">Sign In</button>
+      </div>
+      {% endif %}
+
+      {% for field in form %}
+      <div class="auth-form-group">
+        <label for="{{ field.id_for_label }}" class="auth-form-label">{{ field.label }}</label>
+        <input type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" required
+               class="auth-form-input {% if field.errors %}has-error{% endif %}" placeholder="123456" style="text-align: center; letter-spacing: 0.25em; font-size: 1.25rem; font-weight: 700;">
+        {% if field.errors %}
+        <span class="auth-form-error">{{ field.errors }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <button type="submit" class="auth-btn-primary">Sign in</button>
     </form>
 
-    <div class="links">
-        <p><a href="{% url 'account_request_login_code' %}">Request a new code</a></p>
+    <div class="auth-footer-text">
+      <a href="{% url 'account_request_login_code' %}">Request a new code</a> &bull; <a href="{% url 'account_login' %}">Back to log in</a>
     </div>
+  </div>
 </div>
 {% endblock %}

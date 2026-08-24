@@ -1,27 +1,40 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Django Scaffold{% endblock %}
+{% block title %}Django Scaffold — Modern Django Starter{% endblock %}
 
 {% block content %}
-<div class="auth-card" style="text-align: center;">
-    <h1>Welcome to Django Scaffold</h1>
+{% include "partials/_auth_styles.html" %}
+
+<div class="auth-page" style="flex-direction: column; width: 100%; padding-bottom: 4rem;">
+  <div class="auth-card" style="max-width: 580px; margin: 2rem 0;">
+    <div class="auth-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+    </div>
+    <span class="auth-eyebrow">Production Ready</span>
+    <h1 class="auth-heading">Django Scaffold</h1>
     
     {% if user.is_authenticated %}
-        <p style="margin-bottom: 1rem; color: #15803d; font-weight: 500;">
-            You are logged in as {{ user.email|default:user.username }}
+        <p class="auth-subtext">
+            Welcome back, <strong>{{ user.email|default:user.username }}</strong>. You have full access to your account and dashboard.
         </p>
-        <form method="POST" action="{% url 'account_logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn-outline">Sign Out</button>
-        </form>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="{% url 'users:profile' %}" class="auth-btn-primary" style="flex: 1; min-width: 180px;">Settings & Profile</a>
+            <form method="POST" action="{% url 'account_logout' %}" style="flex: 1; min-width: 180px; margin: 0;">
+                {% csrf_token %}
+                <button type="submit" class="auth-btn-secondary" style="width: 100%;">Sign Out</button>
+            </form>
+        </div>
     {% else %}
-        <p style="margin-bottom: 1rem; color: #4b5563;">
-            You are not logged in.
+        <p class="auth-subtext">
+            A fast, modular, modern Django starter template with full authentication, Google sign-in, and customizable profile settings.
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center;">
-            <a href="{% url 'account_login' %}" class="btn" style="flex: 1;">Sign In</a>
-            <a href="{% url 'account_signup' %}" class="btn btn-outline" style="flex: 1;">Sign Up</a>
+            <a href="{% url 'account_signup' %}" class="auth-btn-primary" style="flex: 1;">Get Started Free</a>
+            <a href="{% url 'account_login' %}" class="auth-btn-secondary" style="flex: 1;">Log In</a>
         </div>
     {% endif %}
+  </div>
 </div>
+
+{% include "partials/_footer.html" %}
 {% endblock %}

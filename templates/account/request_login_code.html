@@ -3,36 +3,45 @@
 {% block title %}Request Login Code - Django Scaffold{% endblock %}
 
 {% block content %}
-<div class="auth-card">
-    <h1>Login without a password</h1>
-    <p style="margin-bottom: 1.5rem; color: #4b5563; font-size: 0.875rem;">Enter your email address and we will send you a code to sign in.</p>
-    
-    {% if form.errors %}
-    <div class="alert alert-error">
-        Please correct the errors below.
+{% include "partials/_auth_styles.html" %}
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
     </div>
-    {% endif %}
+    <span class="auth-eyebrow">Passwordless login</span>
+    <h1 class="auth-heading">Sign in with a code</h1>
+    <p class="auth-subtext">Enter your email address and we'll send you a temporary login code.</p>
 
     <form method="POST" action="{% url 'account_request_login_code' %}">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        
-        {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {{ field }}
-                {% if field.help_text %}
-                    <small style="color: #6b7280; font-size: 0.75rem;">{{ field.help_text }}</small>
-                {% endif %}
-                {{ field.errors }}
-            </div>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+      <div class="auth-non-field-errors">
+        {% for error in form.non_field_errors %}
+          <div>{{ error }}</div>
         {% endfor %}
-        
-        <button type="submit">Send Login Code</button>
+      </div>
+      {% endif %}
+
+      {% for field in form %}
+      <div class="auth-form-group">
+        <label for="{{ field.id_for_label }}" class="auth-form-label">{{ field.label }}</label>
+        <input type="email" name="{{ field.name }}" id="{{ field.id_for_label }}" required
+               class="auth-form-input {% if field.errors %}has-error{% endif %}" placeholder="name@example.com">
+        {% if field.errors %}
+        <span class="auth-form-error">{{ field.errors }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <button type="submit" class="auth-btn-primary">Send login code</button>
     </form>
 
-    <div class="links">
-        <p><a href="{% url 'account_login' %}">Back to Sign in</a></p>
+    <div class="auth-footer-text">
+      <a href="{% url 'account_login' %}">&larr; Back to standard login</a>
     </div>
+  </div>
 </div>
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Verify Your Email Address" %} - Django Scaffold{% endblock %}
+
+{% block content %}
+{% include "partials/_auth_styles.html" %}
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-icon-warning">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+    </div>
+    <span class="auth-eyebrow">{% trans "Verification required" %}</span>
+    <h1 class="auth-heading">{% trans "Verify your email" %}</h1>
+    <p class="auth-subtext">{% blocktrans %}We need to verify your email address before you can continue. We've sent a verification email — please check your inbox and spam folder.{% endblocktrans %}</p>
+
+    <a href="{% url 'account_login' %}" class="auth-btn-primary">{% trans "Back to log in" %}</a>
+
+    <div class="auth-footer-text">
+      <a href="{% url 'account_login' %}">&larr; Return to Sign In</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
