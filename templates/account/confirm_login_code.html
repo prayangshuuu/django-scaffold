@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Confirm Login Code - Django Scaffold{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h1>Enter Login Code</h1>
+    <p style="margin-bottom: 1.5rem; color: #4b5563; font-size: 0.875rem;">We've sent a login code to your email. Please enter it below.</p>
+    
+    {% if form.errors %}
+    <div class="alert alert-error">
+        Please correct the errors below.
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'account_confirm_login_code' %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #6b7280; font-size: 0.75rem;">{{ field.help_text }}</small>
+                {% endif %}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+        
+        <button type="submit">Sign In</button>
+    </form>
+
+    <div class="links">
+        <p><a href="{% url 'account_request_login_code' %}">Request a new code</a></p>
+    </div>
+</div>
+{% endblock %}

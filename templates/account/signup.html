@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up - Django Scaffold{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h1>Create an Account</h1>
+    
+    {% if form.errors %}
+    <div class="alert alert-error">
+        Please correct the errors below.
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #6b7280; font-size: 0.75rem;">{{ field.help_text }}</small>
+                {% endif %}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+        
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="divider">or</div>
+
+    {% load socialaccount %}
+    <a href="{% provider_login_url 'google' %}" class="btn btn-outline" style="display:flex; justify-content:center; align-items:center;">
+        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem;" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12.545 10.239v3.821h5.445c-.712 2.315-2.647 3.972-5.445 3.972a5.95 5.95 0 110-11.9 5.617 5.617 0 013.882 1.545l2.714-2.714A9.704 9.704 0 0012.545 2C6.98 2 2.545 6.477 2.545 12s4.435 10 10 10c5.318 0 9.455-3.868 9.455-9.636 0-.825-.091-1.605-.236-2.125h-9.219z"/>
+        </svg>
+        Sign up with Google
+    </a>
+
+    <div class="links">
+        <p>Already have an account? <a href="{% url 'account_login' %}">Sign in</a></p>
+    </div>
+</div>
+{% endblock %}
